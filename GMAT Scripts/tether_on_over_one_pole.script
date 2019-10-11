@@ -7,8 +7,8 @@
 %----------------------------------------
 
 Create Spacecraft DefaultSC;
-GMAT DefaultSC.DateFormat = TAIModJulian;
-GMAT DefaultSC.Epoch = '58127';
+GMAT DefaultSC.DateFormat = A1Gregorian;
+GMAT DefaultSC.Epoch = '01 Jan 2000 12:00:00.034';
 GMAT DefaultSC.CoordinateSystem = EarthMJ2000Eq;
 GMAT DefaultSC.DisplayStateType = Keplerian;
 GMAT DefaultSC.SMA = 6799.999999999999;
@@ -84,7 +84,7 @@ GMAT ElectricThruster1.MassFlowCoeff4 = 0.03211;
 GMAT ElectricThruster1.MassFlowCoeff5 = 2.13781;
 GMAT ElectricThruster1.FixedEfficiency = 0.7;
 GMAT ElectricThruster1.Isp = 4200;
-GMAT ElectricThruster1.ConstantThrust = 0;
+GMAT ElectricThruster1.ConstantThrust = 2e-005;
 
 Create SolarPowerSystem SolarPowerSystem1;
 GMAT SolarPowerSystem1.EpochFormat = 'UTCGregorian';
@@ -102,6 +102,8 @@ GMAT SolarPowerSystem1.SolarCoeff2 = -0.10848;
 GMAT SolarPowerSystem1.SolarCoeff3 = -0.11665;
 GMAT SolarPowerSystem1.SolarCoeff4 = 0.10843;
 GMAT SolarPowerSystem1.SolarCoeff5 = -0.01279;
+
+
 
 
 %----------------------------------------
@@ -162,9 +164,9 @@ GMAT FiniteBurn1.ThrottleLogicAlgorithm = 'MaxNumberOfThrusters';
 
 Create XYPlot XYPlot1;
 GMAT XYPlot1.SolverIterations = Current;
-GMAT XYPlot1.UpperLeft = [ -0.00273972602739726 0.4975609756097561 ];
-GMAT XYPlot1.Size = [ 0.4397260273972603 0.4804878048780488 ];
-GMAT XYPlot1.RelativeZOrder = 615;
+GMAT XYPlot1.UpperLeft = [ -0.005479452054794521 0.4658536585365854 ];
+GMAT XYPlot1.Size = [ 0.4678082191780822 0.5073170731707317 ];
+GMAT XYPlot1.RelativeZOrder = 1698;
 GMAT XYPlot1.Maximized = false;
 GMAT XYPlot1.XVariable = DefaultSC.A1ModJulian;
 GMAT XYPlot1.YVariables = {DefaultSC.Earth.RadPer};
@@ -173,9 +175,9 @@ GMAT XYPlot1.ShowPlot = true;
 
 Create XYPlot XYPlot2;
 GMAT XYPlot2.SolverIterations = Current;
-GMAT XYPlot2.UpperLeft = [ -0.01643835616438356 0.02682926829268293 ];
+GMAT XYPlot2.UpperLeft = [ -0.01438356164383562 0.02317073170731707 ];
 GMAT XYPlot2.Size = [ 0.5 0.45 ];
-GMAT XYPlot2.RelativeZOrder = 601;
+GMAT XYPlot2.RelativeZOrder = 1694;
 GMAT XYPlot2.Maximized = false;
 GMAT XYPlot2.XVariable = DefaultSC.A1ModJulian;
 GMAT XYPlot2.YVariables = {DefaultSC.Earth.ECC};
@@ -184,9 +186,9 @@ GMAT XYPlot2.ShowPlot = true;
 
 Create XYPlot XYPlot3;
 GMAT XYPlot3.SolverIterations = Current;
-GMAT XYPlot3.UpperLeft = [ 0.4876712328767123 0.4939024390243902 ];
-GMAT XYPlot3.Size = [ 0.4924657534246575 0.4963414634146341 ];
-GMAT XYPlot3.RelativeZOrder = 613;
+GMAT XYPlot3.UpperLeft = [ 0.463013698630137 0.4646341463414634 ];
+GMAT XYPlot3.Size = [ 0.5 0.5073170731707317 ];
+GMAT XYPlot3.RelativeZOrder = 1702;
 GMAT XYPlot3.Maximized = false;
 GMAT XYPlot3.XVariable = DefaultSC.A1ModJulian;
 GMAT XYPlot3.YVariables = {DefaultSC.Earth.RadApo};
@@ -195,9 +197,9 @@ GMAT XYPlot3.ShowPlot = true;
 
 Create XYPlot XYPlot4;
 GMAT XYPlot4.SolverIterations = Current;
-GMAT XYPlot4.UpperLeft = [ 0.4636986301369863 0.02682926829268293 ];
+GMAT XYPlot4.UpperLeft = [ 0.4616438356164384 0.02317073170731707 ];
 GMAT XYPlot4.Size = [ 0.5 0.45 ];
-GMAT XYPlot4.RelativeZOrder = 607;
+GMAT XYPlot4.RelativeZOrder = 1690;
 GMAT XYPlot4.Maximized = false;
 GMAT XYPlot4.XVariable = DefaultSC.A1ModJulian;
 GMAT XYPlot4.YVariables = {DefaultSC.Earth.Altitude};
@@ -210,7 +212,7 @@ GMAT ReportFile1.UpperLeft = [ 0 0 ];
 GMAT ReportFile1.Size = [ 0 0 ];
 GMAT ReportFile1.RelativeZOrder = 0;
 GMAT ReportFile1.Maximized = false;
-GMAT ReportFile1.Filename = 'C:\Users\alim764\Documents\Kessler\KesslerOrbitalModelling\GMAT Report Files\0uN.txt';
+GMAT ReportFile1.Filename = 'C:\Users\alim764\Downloads\KesslerOrbitalModelling-master\KesslerOrbitalModelling-master\GMAT Report Files\0uN.txt';
 GMAT ReportFile1.Precision = 16;
 GMAT ReportFile1.Add = {DefaultSC.A1ModJulian, DefaultSC.Earth.Altitude, DefaultSC.Earth.ECC, DefaultSC.Earth.RadApo, DefaultSC.Earth.RadPer, DefaultSC.Earth.Latitude};
 GMAT ReportFile1.WriteHeaders = true;
@@ -229,14 +231,12 @@ Create Variable I;
 
 
 
+
+
 %----------------------------------------
 %---------- Mission Sequence
 %----------------------------------------
 
 BeginMissionSequence;
-While DefaultSC.Earth.RadPer > 6550
-   Propagate DefaultProp(DefaultSC) {DefaultSC.Earth.Latitude = 60};
-   BeginFiniteBurn FiniteBurn1(DefaultSC);
-   Propagate DefaultProp(DefaultSC) {DefaultSC.Earth.Latitude = 59};
-   EndFiniteBurn FiniteBurn1(DefaultSC);
-EndWhile;
+BeginFiniteBurn FiniteBurn1(DefaultSC);
+Propagate DefaultProp(DefaultSC) {DefaultSC.Earth.Altitude = 6550};
